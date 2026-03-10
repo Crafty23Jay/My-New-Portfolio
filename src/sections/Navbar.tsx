@@ -4,6 +4,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { Menu, X, Sun, Moon, Home, User, Briefcase, Mail, LogIn, UserCog } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Logo from '../assets/myLogo.png';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,9 +75,11 @@ export default function Navbar() {
             >
               <Link 
                 to="/" 
-                className="font-display text-2xl md:text-3xl text-[#6727aa] dark:text-[#9d71e8] hover:scale-110 transition-transform duration-300 inline-block"
+                className="flex gap-1 align-center justify-center font-display text-2xl md:text-3xl text-[#6727aa] dark:text-[#9d71e8] hover:scale-110 transition-transform duration-300 "
                 style={{ transformOrigin: 'center' }}
-              >
+              ><div className="w-9 h-9 md:w-9 md:h-9 mx-auto rounded-full bg-gradient-to-br from-[#6727aa] to-[#9d71e8] flex items-center justify-center shadow-[0_0_10px_rgba(103,39,170,0.5)] shadow-purple-500/30 animate-pulse-glow">
+                 <img src={Logo} alt="Logo" className="w-6 h-6 md:w-6 md:h-6 " />
+                </div>
                 Crafty Jay
               </Link>
             </motion.div>

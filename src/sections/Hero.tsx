@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
+// import { Sparkles } from 'lucide-react';
+import  Logo  from '../assets/myLogo.png';
 
 interface Particle {
   x: number;
@@ -180,7 +182,7 @@ export default function Hero() {
           style={{ perspective: '1000px' }}
         >
           <div className="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full bg-gradient-to-br from-[#6727aa] to-[#9d71e8] flex items-center justify-center shadow-2xl shadow-purple-500/30 animate-pulse-glow">
-            <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-white" />
+            <img src={Logo} alt="Logo" className="w-12 h-12 md:w-14 md:h-14 " />
           </div>
         </motion.div>
 
