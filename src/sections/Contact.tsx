@@ -38,19 +38,37 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
     try {
+      // Validate environment variables
+      if (!serviceId || !templateId || !publicKey) {
+        console.error('Missing EmailJS credentials:', { serviceId, templateId, publicKey });
+        alert('EmailJS configuration is missing. Please check your .env file.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log('Sending email with:', { serviceId, templateId, formData });
+
       // Send email using EmailJS
-      await emailjs.send(
-        'service_default', // Replace with your EmailJS service ID
-        'template_default', // Replace with your EmailJS template ID
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
           to_email: 'crafty23jay@gmail.com',
         },
-        'your_public_key' // Replace with your EmailJS public key
+        publicKey
       );
+
+      console.log('Email sent successfully:', response);
 
       // Also send WhatsApp message
       const whatsappMessage = `Hello Crafty Jay!\n\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
@@ -63,9 +81,7 @@ export default function Contact() {
       setTimeout(() => setIsSuccess(false), 5000);
     } catch (error) {
       console.error('Error sending message:', error);
-      // Still show success as fallback
-      setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 5000);
+      alert(`Failed to send message: ${error instanceof Error ? error.message : String(error)}`);
     } finally {
       setIsSubmitting(false);
     }
