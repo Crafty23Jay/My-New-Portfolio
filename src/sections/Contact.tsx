@@ -70,10 +70,12 @@ export default function Contact() {
 
       console.log('Email sent successfully:', response);
 
-      // Also send WhatsApp message
-      const whatsappMessage = `Hello Crafty Jay!\n\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
+      // Send copy to WhatsApp (BCC)
+      /*
+      const whatsappMessage = `New message from portfolio:\n\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
       const whatsappUrl = `https://wa.me/2348084090236?text=${encodeURIComponent(whatsappMessage)}`;
       window.open(whatsappUrl, '_blank');
+      */
 
       setIsSuccess(true);
       setFormData({ name: '', email: '', message: '' });
