@@ -15,6 +15,11 @@ import {
 import emailjs from '@emailjs/browser';
 
 export default function Contact() {
+  // EmailJS credentials hardcoded (no .env)
+  const SERVICE_ID = 'service_7muuv52'; // replace with your real service id
+  const TEMPLATE_ID = 'template_8ilv53b'; // replace with your real template id
+  const PUBLIC_KEY = 'VOnQw6AODO9D2Iysm'; // replace with your real public key
+  
   const ref = useRef(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -38,21 +43,15 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+    // initialize EmailJS with the public key
+    emailjs.init(PUBLIC_KEY);
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    // Using hardcoded credentials
+    const serviceId = SERVICE_ID;
+    const templateId = TEMPLATE_ID;
+    const publicKey = PUBLIC_KEY;
 
     try {
-      // Validate environment variables
-      if (!serviceId || !templateId || !publicKey) {
-        console.error('Missing EmailJS credentials:', { serviceId, templateId, publicKey });
-        alert('EmailJS configuration is missing. Please check your .env file.');
-        setIsSubmitting(false);
-        return;
-      }
-
       console.log('Sending email with:', { serviceId, templateId, formData });
 
       // Send email using EmailJS
