@@ -16,6 +16,7 @@ import FloatingChat from './sections/FloatingChat';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
 import './App.css';
+import TubesCursor from './components/ui/TubesCursor';
 
 function HomePage() {
   return (
@@ -27,6 +28,7 @@ function HomePage() {
       <Projects />
       <Gallery />
       <Marquee />
+      <TubesCursor />
       <Contact />
       <Footer />
       <FloatingChat />
